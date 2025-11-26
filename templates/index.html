@@ -29,76 +29,40 @@
                             placeholder="e.g., For a startup founder, Morning vibes">
                     </div>
                     <div class="button-group">
-                        <!DOCTYPE html>
-                        <html lang="en">
+                        <button type="submit" id="generateBtn">Generate</button>
+                        <button type="button" id="randomBtn" class="secondary-btn">Surprise Me 🎲</button>
+                    </div>
+                </form>
+            </section>
 
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>Quote & Image Generator</title>
-                            <link rel="stylesheet" href="/static/style.css">
-                        </head>
+            <section id="resultSection" class="result-section hidden">
+                <div class="content-wrapper">
+                    <div class="image-column">
+                        <div class="image-container">
+                            <img id="generatedImage" src="" alt="Generated Visual">
+                            <div id="loadingSpinner" class="spinner hidden"></div>
+                        </div>
+                        <button id="downloadBtn" class="action-btn hidden">⬇️ Download Image</button>
+                    </div>
 
-                        <body>
-                            <div class="container">
-                                <header>
-                                    <h1>✨ Quote & Image Generator</h1>
-                                    <p>Create inspiring quotes and visuals with AI</p>
-                                </header>
+                    <div class="text-column">
+                        <div class="quote-box">
+                            <h3>Fact / Quote</h3>
+                            <blockquote id="quoteText">"Your quote will appear here..."</blockquote>
+                            <button id="copyQuoteBtn" class="icon-btn" title="Copy Quote">📋 Copy</button>
+                        </div>
 
-                                <main>
-                                    <section class="input-section">
-                                        <form id="generateForm">
-                                            <div class="form-group">
-                                                <label for="prompt">Topic / Prompt</label>
-                                                <input type="text" id="prompt" name="prompt"
-                                                    placeholder="e.g., Success, Nature, Resilience" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="description">Additional Context (Optional)</label>
-                                                <input type="text" id="description" name="description"
-                                                    placeholder="e.g., For a startup founder, Morning vibes">
-                                            </div>
-                                            <div class="button-group">
-                                                <button type="submit" id="generateBtn">Generate</button>
-                                                <button type="button" id="randomBtn" class="secondary-btn">Surprise Me
-                                                    🎲</button>
-                                            </div>
-                                        </form>
-                                    </section>
+                        <div class="caption-box">
+                            <h3>Instagram Caption</h3>
+                            <textarea id="captionText" readonly></textarea>
+                            <button id="copyCaptionBtn" class="icon-btn" title="Copy Caption">📋 Copy Caption</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
 
-                                    <section id="resultSection" class="result-section hidden">
-                                        <div class="content-wrapper">
-                                            <div class="image-column">
-                                                <div class="image-container">
-                                                    <img id="generatedImage" src="" alt="Generated Visual">
-                                                    <div id="loadingSpinner" class="spinner hidden"></div>
-                                                </div>
-                                                <button id="downloadBtn" class="action-btn hidden">⬇️ Download
-                                                    Image</button>
-                                            </div>
-
-                                            <div class="text-column">
-                                                <div class="quote-box">
-                                                    <h3>Fact / Quote</h3>
-                                                    <blockquote id="quoteText">"Your quote will appear here..."
-                                                    </blockquote>
-                                                    <button id="copyQuoteBtn" class="icon-btn" title="Copy Quote">📋
-                                                        Copy</button>
-                                                </div>
-
-                                                <div class="caption-box">
-                                                    <h3>Instagram Caption</h3>
-                                                    <textarea id="captionText" readonly></textarea>
-                                                    <button id="copyCaptionBtn" class="icon-btn" title="Copy Caption">📋
-                                                        Copy Caption</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </main>
-                            </div>
-                            <script src="/static/script.js"></script>
-                        </body>
-
-                        </html>
+</html>

@@ -1,21 +1,9 @@
 # System Prompts and Constants
 
 # Space Educator Bot Prompt
-QUOTE_SYSTEM_PROMPT = """You are a space educator bot. Your task is to generate a single fun fact about the following celestial object:
+QUOTE_SYSTEM_PROMPT = """YTell me a fun fact about the following entity:
 
 **Entity**: {{entity}}
-
-Guidelines:
-- make it Do you know type; dont include the words do you know just the style
-- Keep the fact short .
-- Make it surprising, quirky, or awe-inspiring.
-- Make it fun and engaging.
-- Make it interesting and informative.
-- Make it goosebumps-inducing.
-- Make it thought-provoking.
-- Make it inspiring.
-- Avoid technical jargon unless it's explained simply.
-- Do not repeat facts already widely known (e.g., “The Sun is hot”).
 
 Output format:
 [Your fact here]"""
@@ -28,19 +16,13 @@ Quote: "{{quote}}"
 
 Instructions:
 - **Visual Style**: Make the image according to the quote and the theme of space. use terms from the quote and include the elemet or things mentioned in the quote
-- **Composition**: Vertical (9:16) for Instagram Reels..
-- **Typography (CRITICAL)**: 
-  - **PLACEMENT**: CENTER of the image and make it take full width of the image with little space at both end.
-  - **COLOR**: PURE WHITE (#FFFFFF) with a subtle outer glow for contrast.
-  - **SIZE**: LARGE and readable.
-  - **FONT**: Use the 'Ubuntu' font (or a similar high-quality Sans Serif / Neo Grotesque).
-  - **STYLE**: Futuristic, clean, competent, and human.
-  - **VISIBILITY**: Ensure the background behind the text is according to the text visibility.
+- **Composition**: Vertical (9:16) for Instagram Reels. Open negative space (deep black/dark blue) at the BOTTOM CENTER to allow for text overlay.
+- **Typography**: DO NOT INCLUDE ANY TEXT IN THE IMAGE. The text will be added programmatically later.
 - **Interpretation**: Metaphorical but grounded in the grandeur of the universe.
 - **Mood**: Awe-inspiring, infinite, silent, majestic.
 
 Output format:
-Image Prompt: [Detailed description of the provided quote + specific instruction for text placement in a dark/clear area for maximum readability + vertical 9:16 aspect ratio]
+Image Prompt: [Detailed description of the provided quote + specific instruction for a clean image with no text + vertical 9:16 aspect ratio]
 Progression Text: [A poetic 1-3 word phrase ending with ellipses]
 Transparent Background: false"""
 

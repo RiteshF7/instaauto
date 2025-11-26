@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from quote_service import QuoteService
 from image_service import ImageService
+from text_overlay_service import TextOverlayService
 import logging
 
 # Configure logging
@@ -21,6 +22,7 @@ templates = Jinja2Templates(directory="templates")
 # Services
 quote_service = QuoteService()
 image_service = ImageService()
+text_overlay_service = TextOverlayService()
 
 class GenerateRequest(BaseModel):
     prompt: str
@@ -48,8 +50,20 @@ async def generate(request: GenerateRequest):
         logger.info("Generated caption")
 
         # 3. Generate Image
-        image_url = image_service.generate_image(quote)
-        logger.info(f"Generated image URL: {image_url}")
+        try:
+            generated_image = image_service.generate_image(quote)
+            logger.info("Image generated successfully")
+            
+            # 4. Overlay text on image
+            final_image = text_overlay_service.overlay_text(generated_image, quote)
+            logger.info("Text overlaid on image")
+            
+            # 5. Convert to base64 data URL
+            image_url = text_overlay_service.image_to_base64(final_image)
+            logger.info("Image converted to base64")
+        except Exception as e:
+            logger.error(f"Error generating/processing image: {e}")
+            image_url = "https://placehold.co/600x400?text=Error+Generating+Image"
 
         return GenerateResponse(quote=quote, image_url=image_url, caption=caption)
 
@@ -59,4 +73,11 @@ async def generate(request: GenerateRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    print("\n" + "="*50)
+    print("🚀 Server starting...")
+    print("="*50)
+    print("📱 Access the app at:")
+    print("   http://localhost:8000")
+    print("   http://127.0.0.1:8000")
+    print("="*50 + "\n")
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
