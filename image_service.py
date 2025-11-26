@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
+from prompts import IMAGE_SYSTEM_PROMPT
+
 class ImageService:
     def __init__(self):
         self.api_key = os.getenv("GEMINI_API_KEY")
@@ -16,34 +18,6 @@ class ImageService:
         else:
             # Initialize the client with the API key
             self.client = genai.Client(api_key=self.api_key)
-
-    SYSTEM_PROMPT = """You are a cosmic visual imagination agent. Your task is to generate a breathtaking vertical (9:16) space-themed image that directly reflects the meaning of the given quote, while also including the quote text inside the image.
-
-Input:
-Quote: "{{quote}}"
-
-Instructions:
-- Interpret the quote literally or metaphorically, and design a space scene that embodies its essence.
-- Always use cosmic elements: galaxies, nebulae, planets, stars, black holes, wormholes, cosmic oceans, or surreal celestial flows.
-- The image must visually depict the action or fact described in the quote — help the viewer imagine it happening.
-- Style inspiration: 
-  - Celestial hands reaching from the stars
-  - Humans dwarfed by cosmic bridges or vortexes
-  - Surreal stardust streams, glowing planetary horizons
-- Format: Vertical aspect ratio (9:16), suitable for Instagram Reels.
-- Mood: cinematic, surreal, emotionally charged — evoke awe, mystery, and goosebumps.
-- Color palette: deep cosmic tones (purples, blues, silvers, blacks) with radiant accents.
-- Integrate the quote text into the image:
-  - Use beautiful, visible fonts with high readability.
-  - Font color must contrast with the background (e.g., luminous silver, radiant white, glowing cyan).
-  - Typography should match the mood (ethereal glow, cosmic shimmer, futuristic style).
-  - Place the text harmoniously (floating among stars, glowing across a nebula, etched on a planet’s horizon).
-- Do not invent random text — only include the provided quote.
-
-Output format:
-Image Prompt: [Detailed description of the cosmic scene that visually represents the quote + placement of the quote text + mention vertical 9:16 aspect ratio + font style/color/visibility]
-Progression Text: [A poetic 6–8 word phrase ending with ellipses]
-Transparent Background: false"""
 
     def generate_image(self, quote: str) -> str:
         """
@@ -58,7 +32,7 @@ Transparent Background: false"""
         try:
             # Step 1: Generate the Image Prompt
             print(f"Generating image prompt for quote: {quote[:50]}...")
-            text_prompt = self.SYSTEM_PROMPT.replace("{{quote}}", quote)
+            text_prompt = IMAGE_SYSTEM_PROMPT.replace("{{quote}}", quote)
             
             text_response = self.client.models.generate_content(
                 model="gemini-2.5-flash", # Use text model for prompt engineering

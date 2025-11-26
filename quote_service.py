@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
+from prompts import QUOTE_SYSTEM_PROMPT, SPACE_ENTITIES, CAPTION_SYSTEM_PROMPT
+
 class QuoteService:
     def __init__(self):
         api_key = os.getenv("GEMINI_API_KEY")
@@ -14,30 +16,6 @@ class QuoteService:
             # Using gemini-2.5-flash as requested/supported
             self.model = genai.GenerativeModel('gemini-2.5-flash')
 
-    SYSTEM_PROMPT = """You are a space educator bot. Your task is to generate a single fun fact about the following celestial object:
-
-**Entity**: {{entity}}
-
-Guidelines:
-- Keep the fact short (1–3 sentences).
-- Make it surprising, quirky, or awe-inspiring.
-- Avoid technical jargon unless it's explained simply.
-- Do not repeat facts already widely known (e.g., “The Sun is hot”).
-
-Output format:
-Fun Fact: [Your fact here]"""
-
-    SPACE_ENTITIES = [
-        "Moon", "Sun", "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune",
-        "Pluto", "Ceres", "Eris", "Haumea", "Makemake",  # Dwarf planets
-        "Asteroids", "Comets", "Meteorites",
-        "Milky Way", "Andromeda", "Sombrero Galaxy", "Whirlpool Galaxy",
-        "Black Holes", "Neutron Stars", "Pulsars", "Quasars",
-        "Alpha Centauri", "Betelgeuse", "Sirius", "Polaris", "Vega",  # Stars
-        "Orion Nebula", "Crab Nebula", "Carina Nebula",
-        "Exoplanets", "Star Clusters", "Cosmic Microwave Background"
-    ]
-
     def generate_quote(self, prompt: str, description: str = "") -> str:
         """
         Generates a space fact. If prompt is 'random', picks a random entity.
@@ -47,15 +25,18 @@ Fun Fact: [Your fact here]"""
             entity = prompt.strip()
             if not entity or entity.lower() == "random":
                 import random
-                entity = random.choice(self.SPACE_ENTITIES)
+                entity = random.choice(SPACE_ENTITIES)
             
             # Inject entity into system prompt template
-            formatted_system_prompt = self.SYSTEM_PROMPT.replace("{{entity}}", entity)
+            formatted_system_prompt = QUOTE_SYSTEM_PROMPT.replace("{{entity}}", entity)
             
             full_prompt = f"{formatted_system_prompt}\n\nContext: {description}" if description else formatted_system_prompt
 
             response = self.model.generate_content(full_prompt)
-            return response.text.strip()
+            cleaned_text = response.text.strip()
+            if cleaned_text.lower().startswith("fun fact:"):
+                cleaned_text = cleaned_text[9:].strip()
+            return cleaned_text
         except Exception as e:
             print(f"Error generating fact: {e}")
             return "Space is vast and full of mysteries."
@@ -65,16 +46,7 @@ Fun Fact: [Your fact here]"""
         Generates an engaging Instagram caption for the quote.
         """
         try:
-            prompt = f"""You are a social media expert. Generate an engaging Instagram caption for this quote/fact:
-"{quote}"
-
-Requirements:
-- Start with a hook or emoji.
-- Include the quote/fact naturally if needed, or just comment on it.
-- Add 15-20 relevant, high-reach hashtags (e.g., #space, #universe, #astronomy, #cosmos, etc.).
-- Keep it clean and spaced out.
-
-Output ONLY the caption text."""
+            prompt = CAPTION_SYSTEM_PROMPT.replace("{{quote}}", quote)
             
             response = self.model.generate_content(prompt)
             return response.text.strip()
