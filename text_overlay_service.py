@@ -32,7 +32,7 @@ class TextOverlayService:
         width, height = image.size
         
         # Font setup
-        font_size = int(width * 0.04)  # Dynamic font size based on width
+        font_size = int(width * 0.032)  # Slightly smaller dynamic font size based on width
         font = get_ubuntu_font(font_size)
         
         # Wrap text
