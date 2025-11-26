@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
-from prompts import QUOTE_SYSTEM_PROMPT, SPACE_ENTITIES, CAPTION_SYSTEM_PROMPT
+from config.prompts import QUOTE_SYSTEM_PROMPT, SPACE_ENTITIES, CAPTION_SYSTEM_PROMPT
 
 class QuoteService:
     def __init__(self):

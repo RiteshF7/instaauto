@@ -2,9 +2,9 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
-from quote_service import QuoteService
-from image_service import ImageService
-from text_overlay_service import TextOverlayService
+from services.quote_service import QuoteService
+from services.image_service import ImageService
+from services.text_overlay_service import TextOverlayService
 import logging
 
 # Configure logging

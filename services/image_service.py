@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
-from prompts import IMAGE_SYSTEM_PROMPT
+from config.prompts import IMAGE_SYSTEM_PROMPT
 
 class ImageService:
     def __init__(self):

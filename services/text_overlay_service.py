@@ -5,7 +5,7 @@ Handles overlaying text on images with proper formatting and styling.
 import io
 import base64
 from PIL import Image, ImageDraw
-from utils import get_ubuntu_font, draw_text_with_shadow, wrap_text
+from config.utils import get_ubuntu_font, draw_text_with_shadow, wrap_text
 
 
 class TextOverlayService:

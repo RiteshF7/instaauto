@@ -15,7 +15,8 @@ def download_font(font_url, save_path):
         print(f"Font already exists at {save_path}")
 
 def get_ubuntu_font(size=40):
-    font_dir = "assets/fonts"
+    import os
+    font_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "fonts")
     font_path = os.path.join(font_dir, "Ubuntu-Bold.ttf")
     # URL for Ubuntu Bold from Google Fonts (raw github link or similar reliable source)
     # Using a reliable raw link for Ubuntu font
