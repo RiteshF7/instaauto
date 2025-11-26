@@ -29,6 +29,7 @@ class GenerateRequest(BaseModel):
 class GenerateResponse(BaseModel):
     quote: str
     image_url: str
+    caption: str
 
 @app.get("/")
 async def read_root(request: Request):
@@ -42,11 +43,15 @@ async def generate(request: GenerateRequest):
         quote = quote_service.generate_quote(request.prompt, request.description)
         logger.info(f"Generated quote: {quote}")
 
-        # 2. Generate Image
+        # 2. Generate Caption (Parallelizable, but sequential for now)
+        caption = quote_service.generate_caption(quote)
+        logger.info("Generated caption")
+
+        # 3. Generate Image
         image_url = image_service.generate_image(quote)
         logger.info(f"Generated image URL: {image_url}")
 
-        return GenerateResponse(quote=quote, image_url=image_url)
+        return GenerateResponse(quote=quote, image_url=image_url, caption=caption)
 
     except Exception as e:
         logger.error(f"Error processing request: {e}")
