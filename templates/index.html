@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote & Image Generator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ Quote & Image Generator</h1>
+            <p>Create inspiring quotes and visuals with AI</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <form id="generateForm">
+                    <div class="form-group">
+                        <label for="prompt">Topic / Prompt</label>
+                        <input type="text" id="prompt" name="prompt" placeholder="e.g., Success, Nature, Resilience" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Additional Context (Optional)</label>
+                        <input type="text" id="description" name="description" placeholder="e.g., For a startup founder, Morning vibes">
+                    </div>
+                    <button type="submit" id="generateBtn">Generate</button>
+                </form>
+            </section>
+
+            <section id="resultSection" class="result-section hidden">
+                <div class="quote-container">
+                    <blockquote>
+                        <p id="quoteText">"Your quote will appear here..."</p>
+                    </blockquote>
+                </div>
+                <div class="image-container">
+                    <img id="generatedImage" src="" alt="Generated Visual">
+                    <div id="loadingSpinner" class="spinner hidden"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

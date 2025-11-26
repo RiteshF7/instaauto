@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+google-generativeai
+google-genai
+Pillow
+requests
+python-dotenv
+jinja2
