@@ -17,25 +17,31 @@ class ImageService:
             # Initialize the client with the API key
             self.client = genai.Client(api_key=self.api_key)
 
-    SYSTEM_PROMPT = """You are a cosmic visual imagination agent. Your task is to generate a breathtaking space-themed image that directly reflects the meaning of the given quote, while also including the quote text inside the image.
+    SYSTEM_PROMPT = """You are a cosmic visual imagination agent. Your task is to generate a breathtaking vertical (9:16) space-themed image that directly reflects the meaning of the given quote, while also including the quote text inside the image.
 
 Input:
 Quote: "{{quote}}"
 
 Instructions:
 - Interpret the quote literally or metaphorically, and design a space scene that embodies its essence.
-- Always use cosmic elements: galaxies, nebulae, planets, stars, black holes, or cosmic oceans.
+- Always use cosmic elements: galaxies, nebulae, planets, stars, black holes, wormholes, cosmic oceans, or surreal celestial flows.
+- The image must visually depict the action or fact described in the quote — help the viewer imagine it happening.
+- Style inspiration: 
+  - Celestial hands reaching from the stars
+  - Humans dwarfed by cosmic bridges or vortexes
+  - Surreal stardust streams, glowing planetary horizons
+- Format: Vertical aspect ratio (9:16), suitable for Instagram Reels.
+- Mood: cinematic, surreal, emotionally charged — evoke awe, mystery, and goosebumps.
+- Color palette: deep cosmic tones (purples, blues, silvers, blacks) with radiant accents.
 - Integrate the quote text into the image:
+  - Use beautiful, visible fonts with high readability.
+  - Font color must contrast with the background (e.g., luminous silver, radiant white, glowing cyan).
   - Typography should match the mood (ethereal glow, cosmic shimmer, futuristic style).
-  - Place the text harmoniously (e.g., floating among stars, glowing across a nebula, etched on a planet’s horizon).
-  - Ensure readability against the background.
-- The overall mood should evoke awe, mystery, and goosebumps.
-- Style: cinematic, surreal, high-contrast, with deep cosmic colors (purples, blues, silvers, blacks).
-- Format: Vertical aspect ratio (9:16) suitable for Instagram Reels.
+  - Place the text harmoniously (floating among stars, glowing across a nebula, etched on a planet’s horizon).
 - Do not invent random text — only include the provided quote.
 
 Output format:
-Image Prompt: [Detailed description of the cosmic scene that visually represents the quote + placement of the quote text + mention vertical 9:16 aspect ratio]
+Image Prompt: [Detailed description of the cosmic scene that visually represents the quote + placement of the quote text + mention vertical 9:16 aspect ratio + font style/color/visibility]
 Progression Text: [A poetic 6–8 word phrase ending with ellipses]
 Transparent Background: false"""
 
