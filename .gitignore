@@ -29,3 +29,11 @@ Thumbs.db
 
 # Assets (fonts are downloaded automatically)
 # assets/ can be kept or ignored based on preference
+
+# Generated images
+images/*.png
+images/*.jpg
+images/*.jpeg
+# Keep caption files
+!images/instagram_captions.json
+!images/instagram_captions.txt
