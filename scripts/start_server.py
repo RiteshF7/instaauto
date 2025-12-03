@@ -2,14 +2,19 @@
 """
 Server startup script with browser auto-open and port conflict handling
 """
+import sys
+import os
+# Set UTF-8 encoding for Windows console
+if sys.platform == 'win32':
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+
 import webbrowser
 import time
 import threading
 import subprocess
-import sys
 import socket
-import sys
-import os
 # Add parent directory to path to import main
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import app
